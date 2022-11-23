@@ -1,0 +1,44 @@
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
+
+const Login = () => {
+    const { register, handleSubmit, formState: { errors } } = useForm();
+
+    const handleLogin = data => {
+        console.log(data);
+    }
+    return (
+        <div className='flex justify-center items-center h-[600px]'>
+            <div className='w-96 shadow-xl p-3'>
+                <h2 className='text-3xl text-center'>Login</h2>
+                <form onSubmit={handleSubmit(handleLogin)}>
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text">Email</span>
+                        </label>
+                        <input type='email' className="input input-bordered w-full max-w-md" {...register("email", {
+                            required: 'Email address is required'
+                        })} placeholder="Email" />
+                        {errors.email && <p className='text-red-500'>{errors.email?.message}</p>}
+                    </div>
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text">Password</span>
+                        </label>
+                        <input type='password' className="input input-bordered w-full max-w-md" {...register("password", {
+                            required: 'Password is required'
+                        })} placeholder="password" />
+                        {errors.password && <p className='text-red-500'>{errors.password?.message}</p>}
+                    </div>
+                    <p className='text-xs mt-2'><span>Forgot Password?</span></p>
+                    <input className="btn btn-accent mt-4 w-full max-w-md text-white" type="submit" value='Login' />
+                </form>
+                <p>New user? <Link to='/signup' className='text-green-500'>Please Sign Up</Link></p>
+                <button className='btn btn-outline mt-4 w-full max-w-md'>Sign in with Google</button>
+            </div>
+        </div>
+    );
+};
+
+export default Login;
