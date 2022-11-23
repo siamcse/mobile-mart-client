@@ -1,12 +1,31 @@
-import React from 'react';
+import { GoogleAuthProvider } from 'firebase/auth';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 const Login = () => {
+    const { login, popUpSignIn } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const googleProvider = new GoogleAuthProvider();
 
     const handleLogin = data => {
-        console.log(data);
+        const { email, password } = data;
+        login(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(e => console.error(e))
+    };
+
+    const handleGoogleSignIn = () => {
+        popUpSignIn(googleProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(e => console.log(e))
     }
     return (
         <div className='flex justify-center items-center h-[600px]'>
@@ -35,7 +54,7 @@ const Login = () => {
                     <input className="btn btn-accent mt-4 w-full max-w-md text-white" type="submit" value='Login' />
                 </form>
                 <p>New user? <Link to='/signup' className='text-green-500'>Please Sign Up</Link></p>
-                <button className='btn btn-outline mt-4 w-full max-w-md'>Sign in with Google</button>
+                <button onClick={handleGoogleSignIn} className='btn btn-outline mt-4 w-full max-w-md'>Sign in with Google</button>
             </div>
         </div>
     );

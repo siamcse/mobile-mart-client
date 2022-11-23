@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 const SignUp = () => {
+    const { createUser } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const handleSignUp = data => {
-        console.log(data);
+        const { email, password } = data;
+        createUser(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(e => {
+                console.log(e);
+            })
     }
     return (
         <div className='flex justify-center items-center h-[600px]'>
@@ -17,7 +27,7 @@ const SignUp = () => {
                         <label className="label">
                             <span className="label-text">Name</span>
                         </label>
-                        <input type='email' className="input input-bordered w-full max-w-md" {...register("name", {
+                        <input type='name' className="input input-bordered w-full max-w-md" {...register("name", {
                             required: 'Name is required'
                         })} placeholder="Name" />
                         {errors.name && <p className='text-red-500'>{errors.name?.message}</p>}
