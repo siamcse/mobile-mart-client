@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 
 const SignUp = () => {
     const { createUser } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const navigate = useNavigate();
 
     const handleSignUp = data => {
         const { email, password, name, role } = data;
@@ -37,6 +39,10 @@ const SignUp = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
+                if (data.acknowledged){
+                    toast.success('Sign Up successfully');
+                    navigate('/');
+                }
             })
     }
     return (
