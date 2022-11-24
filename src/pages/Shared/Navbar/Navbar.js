@@ -1,9 +1,12 @@
 import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import useAdmin from '../../../hooks/useAdmin';
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
+    const [isAdmin] = useAdmin(user?.email);
+    console.log(isAdmin);
 
     const activeClassName = 'bg-gray-600 text-md text-white rounded-md';
 
