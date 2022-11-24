@@ -8,14 +8,35 @@ const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const handleSignUp = data => {
-        const { email, password } = data;
+        const { email, password, name, role } = data;
+
         createUser(email, password)
             .then(result => {
                 const user = result.user;
-                console.log(user);
+                const currentUser = {
+                    name,
+                    email,
+                    role
+                };
+                saveUser(currentUser);
             })
             .catch(e => {
                 console.log(e);
+            })
+    };
+    //save user to database
+    const saveUser = (user) => {
+        console.log(user);
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
             })
     }
     return (
@@ -25,6 +46,18 @@ const SignUp = () => {
                 <form onSubmit={handleSubmit(handleSignUp)}>
                     <div className="form-control">
                         <label className="label">
+                            <span className="label-text">Type</span>
+                        </label>
+                        <select defaultValue='User' className="select select-bordered w-full max-w-md" {...register("role", {
+                            required: 'Role is required'
+                        })}>
+                            <option>User</option>
+                            <option>Seller</option>
+                        </select>
+                        {errors.role && <p className='text-red-500'>{errors.role?.message}</p>}
+                    </div>
+                    <div className="form-control">
+                        <label className="label">
                             <span className="label-text">Name</span>
                         </label>
                         <input type='name' className="input input-bordered w-full max-w-md" {...register("name", {
@@ -32,6 +65,7 @@ const SignUp = () => {
                         })} placeholder="Name" />
                         {errors.name && <p className='text-red-500'>{errors.name?.message}</p>}
                     </div>
+                    
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Email</span>
