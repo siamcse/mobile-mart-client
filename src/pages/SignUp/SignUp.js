@@ -32,14 +32,15 @@ const SignUp = () => {
         fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
             },
             body: JSON.stringify(user)
         })
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-                if (data.acknowledged){
+                if (data.acknowledged) {
                     toast.success('Sign Up successfully');
                     navigate('/');
                 }
@@ -71,7 +72,7 @@ const SignUp = () => {
                         })} placeholder="Name" />
                         {errors.name && <p className='text-red-500'>{errors.name?.message}</p>}
                     </div>
-                    
+
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Email</span>

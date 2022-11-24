@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Category from './Category';
 
 const Categories = () => {
+    
     const { data: categories = [] } = useQuery({
         queryKey: ['categories'],
         queryFn: async () => {
@@ -12,7 +12,7 @@ const Categories = () => {
             return data;
         }
     });
-    console.log(categories);
+
     return (
         <div className='my-10'>
             <h2 className='text-3xl text-center font-semibold'>Categories {categories.length}</h2>
