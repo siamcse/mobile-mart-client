@@ -3,6 +3,7 @@ import React from 'react';
 const ConfirmationModal = ({ title, message, successModal, modalData, closeModal,action }) => {
     return (
         <div>
+            {/* <label onClick={() => setDeletingSeller(seller)}  className="btn bg-red-600 btn-sm ">Delete</label> */}
             <input type="checkbox" id="popup-modal" className="modal-toggle" />
             <div className="modal">
                 <div className="modal-box">
