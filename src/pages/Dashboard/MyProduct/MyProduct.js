@@ -10,6 +10,7 @@ import toast from 'react-hot-toast';
 const MyProduct = () => {
     const { user } = useContext(AuthContext);
     const [deletingProduct, setDeletingProduct] = useState(null);
+    const [advertisingProduct, setAdvertisingProduct] = useState(null);
 
     const { data: products = [], refetch } = useQuery({
         queryKey: ['products', user?.email],
@@ -27,8 +28,25 @@ const MyProduct = () => {
         })
             .then(res => res.json())
             .then(data => {
-                toast.success('Product Deleted Successfully');
-                refetch();
+                if (data.acknowledged) {
+                    toast.success('Product Deleted Successfully');
+                    refetch();
+                }
+            })
+    };
+
+    const handleAdvertisingProduct = product => {
+        console.log(product);
+        fetch(`http://localhost:5000/products/${product._id}`, {
+            method: 'PUT'
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.modifiedCount) {
+                    toast.success('Product Advertised Successfully');
+                    refetch();
+                }
             })
     }
 
@@ -44,6 +62,7 @@ const MyProduct = () => {
                                 <th>Name</th>
                                 <th>Resell Price</th>
                                 <th>Sales Status</th>
+                                <th>Advertise</th>
                                 <th>Delete</th>
                             </tr>
                         </thead>
@@ -55,7 +74,24 @@ const MyProduct = () => {
                                     <th>{i + 1}</th>
                                     <td>{product.name}</td>
                                     <td>{product.resellPrice}</td>
-                                    <td>{product.resellPrice}</td>
+                                    <td>
+                                        {
+                                            product.isAvailable ?
+                                                'Available' : 'Sold'
+                                        }
+                                    </td>
+                                    <td>
+                                        {
+                                            !product.advertise ? <>
+                                                <label
+                                                className='text-red-500 cursor-pointer'
+                                                    htmlFor="popup-modal"
+                                                    onClick={() => setAdvertisingProduct(product)}
+                                                >Advertise</label>
+                                            </>
+                                                : <p className='text-green-500 italic'>Advertised</p>
+                                        }
+                                    </td>
                                     <td>
                                         <label
                                             onClick={() => setDeletingProduct(product)} htmlFor="popup-modal"
@@ -77,6 +113,17 @@ const MyProduct = () => {
                     modalData={deletingProduct}
                     closeModal={setDeletingProduct}
                     action={'Delete'}
+                >
+                </ConfirmationModal>
+            }
+            {
+                advertisingProduct && <ConfirmationModal
+                    title={'Are you sure to Advertise?'}
+                    message={`You are advertising this product: ${advertisingProduct.name}`}
+                    successModal={handleAdvertisingProduct}
+                    modalData={advertisingProduct}
+                    closeModal={setAdvertisingProduct}
+                    action={'Advertise'}
                 >
                 </ConfirmationModal>
             }

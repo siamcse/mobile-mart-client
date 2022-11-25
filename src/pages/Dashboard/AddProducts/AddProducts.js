@@ -55,7 +55,9 @@ const AddProducts = () => {
                         purchaseYear,
                         seller: user.displayName,
                         email: user.email,
-                        categoryId
+                        categoryId,
+                        isAvailable: true,
+                        advertise: false
                     };
                     console.log(product);
                     fetch('http://localhost:5000/products', {
