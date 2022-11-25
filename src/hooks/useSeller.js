@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 const useSeller = email => {
     const [isSeller, setIsSeller] = useState(false);
     const [isSellerLoading, setIsSellerLoading] = useState(true);
+    const [seller, setSeller] = useState({});
 
     useEffect(() => {
         if (email) {
@@ -10,12 +11,13 @@ const useSeller = email => {
                 .then(res => res.json())
                 .then(data => {
                     setIsSeller(data.isSeller);
-                    isSellerLoading(false);
+                    setSeller(data.seller);
+                    setIsSellerLoading(false);
                 })
         }
     }, [email]);
-
-    return [isSeller,isSellerLoading];
+    console.log(seller);
+    return [isSeller, isSellerLoading];
 }
 
 export default useSeller;

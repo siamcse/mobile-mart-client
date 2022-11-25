@@ -1,7 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { MdVerifiedUser } from "react-icons/md";
 
 const Product = ({ product }) => {
-    const { name, seller, image, originalPrice, location, description, categoryId, condition, resellPrice, posted } = product;
+    const { name, email, image, originalPrice, location, description, categoryId, condition, resellPrice, posted } = product;
+
+    const [seller, setSeller] = useState({});
+
+    useEffect(() => {
+        if (email) {
+            fetch(`http://localhost:5000/users/seller/${email}`)
+                .then(res => res.json())
+                .then(data => {
+                    setSeller(data.seller);
+                })
+        }
+    }, [email]);
+    console.log(seller);
     return (
         <div>
             <div className="card md:card-side bg-base-100 shadow-xl mt-10">
@@ -16,15 +30,19 @@ const Product = ({ product }) => {
                         , Location: {' '}
                         <span className='font-semibold'>{location}</span>
                     </p>
-                    <div className='flex justify-between'>
-                        <p className=''><span className='font-semibold'>Original Price: </span> ${originalPrice}</p>
-                        <p className=''><span className='font-semibold'>Resell Price: </span> {resellPrice}</p>
-                    </div>
+                    <p className=''><span className='font-semibold'>Original Price: </span> ${originalPrice}</p>
+                    <p className=''><span className='font-semibold'>Resell Price: </span> {resellPrice}</p>
                     <p className=''><span className='font-semibold'>Condition: </span>{condition}</p>
                     <p className=''><span className='font-semibold'>Description: </span>{description}</p>
                     <div className="flex justify-between">
-                        <p className='text-lg'><span className='font-semibold'>Seller: </span> {seller}</p>
-                        <button className="btn btn-primary btn-sm">Buy Now</button>
+                        <p className='text-lg flex items-center'>
+                            <span className='font-semibold mr-2'>Seller: </span>{" "} {seller?.name}
+                            {
+                                seller.verified &&
+                                <MdVerifiedUser className='text-blue-600 ml-2' />
+                            }
+                        </p>
+                        <button className="btn btn-accent btn-sm">Book Now</button>
                     </div>
                 </div>
             </div>
