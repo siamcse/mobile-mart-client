@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 
 const SignUp = () => {
-    const { createUser } = useContext(AuthContext);
+    const { createUser, profileUpdate } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
 
@@ -15,12 +15,22 @@ const SignUp = () => {
         createUser(email, password)
             .then(result => {
                 const user = result.user;
-                const currentUser = {
-                    name,
-                    email,
-                    role
-                };
-                saveUser(currentUser);
+                const userInfo = {
+                    displayName: name
+                }
+                
+                profileUpdate(userInfo)
+                .then(result=>{
+                    const currentUser = {
+                        name,
+                        email,
+                        role
+                    };
+                    saveUser(currentUser);
+                })
+                .catch(e=>console.error(e))
+
+                
             })
             .catch(e => {
                 console.log(e);

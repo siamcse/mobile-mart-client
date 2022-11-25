@@ -16,7 +16,6 @@ const useSeller = email => {
                 })
         }
     }, [email]);
-    console.log(seller);
     return [isSeller, isSellerLoading];
 }
 
