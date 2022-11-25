@@ -1,17 +1,20 @@
 import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
 const AddProducts = () => {
     const { user } = useContext(AuthContext);
     const { register, handleSubmit } = useForm();
-    const [categoryId, setCategoryId] = useState('');
+    const navigate = useNavigate();
+
     const currentDate = new Date();
     const date = format(currentDate, 'PPpp');
 
-    
+
 
     const { data: categories = [] } = useQuery({
         queryKey: ['categories'],
@@ -23,26 +26,57 @@ const AddProducts = () => {
     });
 
     const handleAddProduct = data => {
-        console.log(data.image[0]);
-        const { name, image, resellPrice, originalPrice, condition, phone, location, description, purchaseYear } = data;
+        const { name, image, resellPrice, originalPrice, condition, phone, location, description, purchaseYear, categoryId } = data;
 
-        console.log(categoryId);
+        const formData = new FormData();
 
-        const product = {
-            name,
-            image,
-            posted: date,
-            resellPrice,
-            originalPrice,
-            condition,
-            phone,
-            location,
-            description,
-            purchaseYear,
-            seller: user.displayName,
-            email: user.email,
-        };
-        console.log(product);
+        formData.append('image', data.image[0]);
+        console.log(formData);
+
+        const url = `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_ImgbbHashKey}`;
+
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(img => {
+                if (img.success) {
+                    const product = {
+                        name,
+                        image: img.data.url,
+                        posted: date,
+                        resellPrice,
+                        originalPrice,
+                        condition,
+                        phone,
+                        location,
+                        description,
+                        purchaseYear,
+                        seller: user.displayName,
+                        email: user.email,
+                        categoryId
+                    };
+                    console.log(product);
+                    fetch('http://localhost:5000/products', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(product)
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log(data);
+                            if (data.acknowledged) {
+                                toast.success('Product added successfully.');
+                                navigate('/dashboard/myproducts');
+
+                            }
+                        })
+                }
+            })
+
     }
     return (
         <div className=''>
@@ -78,7 +112,7 @@ const AddProducts = () => {
                             </label>
                             <input className="input input-bordered w-full max-w-md"  {...register("resellPrice")} placeholder="Product Name" />
                         </div>
-                        
+
                         <div className="form-control w-full max-w-md">
                             <label className="label">
                                 <span className="label-text">Mobile Number</span>
@@ -101,11 +135,11 @@ const AddProducts = () => {
                             <label className="label">
                                 <span className="label-text">Category</span>
                             </label>
-                            <select className="input input-bordered w-full max-w-md" {...register("category", { required: true })}>
+                            <select className="input input-bordered w-full max-w-md" {...register("categoryId", { required: true })}>
                                 {
                                     categories.map(category => <option
                                         key={category._id}
-                                        onChange={() => setCategoryId(category._id)}
+                                        value={category._id}
                                     >{category.name}</option>)
                                 }
                             </select>
@@ -114,7 +148,7 @@ const AddProducts = () => {
                             <label className="label">
                                 <span className="label-text">Image</span>
                             </label>
-                            <input type="file" {...register('image',{required: 'Image is required'})} className="file-input w-full max-w-md" />
+                            <input type="file" {...register('image', { required: 'Image is required' })} className="file-input w-full max-w-md" />
                         </div>
 
                     </div>
