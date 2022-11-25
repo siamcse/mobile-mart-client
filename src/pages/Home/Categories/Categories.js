@@ -21,7 +21,7 @@ const Categories = () => {
                     categories.map(category => <Link
                         key={category._id}
                         to={`/category/${category._id}`}
-                        className='shadow-xl bg-emerald-500 text-white rounded-lg'>
+                        className='shadow-xl bg-gray-700 text-white rounded-lg'>
                         <h2 className='text-4xl text-center p-12'>{category.name}</h2>
                     </Link>)
                 }

@@ -26,7 +26,7 @@ const AddProducts = () => {
     });
 
     const handleAddProduct = data => {
-        const { name, image, resellPrice, originalPrice, condition, phone, location, description, purchaseYear, categoryId } = data;
+        const { name, resellPrice, originalPrice, condition, phone, location, description, purchaseYear, categoryId } = data;
 
         const formData = new FormData();
 
@@ -81,10 +81,10 @@ const AddProducts = () => {
 
     }
     return (
-        <div className=''>
-            <h2 className='text-2xl my-8'>Add Product</h2>
+        <div className='my-4'>
+            <h2 className='text-2xl'>Add Product</h2>
             <div>
-                <form onSubmit={handleSubmit(handleAddProduct)} className=' grid grid-cols-1 gap-4'>
+                <form onSubmit={handleSubmit(handleAddProduct)} className=' grid grid-cols-1 gap-2'>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="form-control w-full max-w-md">
                             <label className="label">
@@ -161,7 +161,7 @@ const AddProducts = () => {
                         <textarea className="input input-bordered w-full h-24" {...register("description")} placeholder="Your phone description" />
                     </div>
 
-                    <input className="btn btn-secondary w-full" type="submit" />
+                    <input className="btn btn-accent w-full" type="submit" />
                 </form>
             </div>
         </div>

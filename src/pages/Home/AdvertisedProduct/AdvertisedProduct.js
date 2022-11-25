@@ -15,12 +15,12 @@ const AdvertisedProduct = () => {
     return (
         <div>
             {
-                advertisedProduct && 
+                advertisedProduct &&
                 <div className='my-12'>
                         <h2 className='text-3xl text-center font-semibold'>Advertised Products {advertisedProduct?.length}</h2>
                         <div className='lg:w-3/4 mx-auto'>
                             {
-                                advertisedProduct.map(product=><Product
+                                advertisedProduct.map(product => product.isAvailable && <Product
                                 key={product._id}
                                 product={product}
                                 ></Product>)

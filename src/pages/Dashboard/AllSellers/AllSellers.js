@@ -72,7 +72,7 @@ const AllSellers = () => {
                                         </td>
                                 }
                                 <td>
-                                    <label onClick={() => setDeletingSeller(seller)} htmlFor="popup-modal" className="btn bg-red-600 btn-sm ">Delete</label>
+                                    <label onClick={() => setDeletingSeller(seller)} htmlFor="popup-modal" className="btn bg-red-700 btn-sm ">Delete</label>
                                 </td>
                             </tr>)
                         }
