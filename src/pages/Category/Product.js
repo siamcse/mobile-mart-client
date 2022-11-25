@@ -18,9 +18,9 @@ const Product = ({ product }) => {
     console.log(seller);
     return (
         <div>
-            <div className="card md:card-side bg-base-100 shadow-xl mt-10">
+            <div className="card md:card-side bg-base-100 shadow-xl mt-10 border border-red-500">
                 <figure className=''>
-                    <img className='w-56 h-56 rounded-md' src={image} alt={name} />
+                    <img className='w-64 min-h-full p-1 rounded-xl' src={image} alt={name} />
                 </figure>
                 <div className="card-body">
                     <h2 className="card-title">{name}</h2>
