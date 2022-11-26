@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { MdVerifiedUser } from "react-icons/md";
 
-const Product = ({ product }) => {
+const Product = ({ product, setSelectedProduct }) => {
     const { name, email, image, originalPrice, location, description, categoryId, condition, resellPrice, posted } = product;
 
     const [seller, setSeller] = useState({});
@@ -16,9 +16,6 @@ const Product = ({ product }) => {
         }
     }, [email]);
 
-    const handleAddToOrder = product => {
-        console.log(product);
-    }
     return (
         <div>
             <div className="card md:card-side bg-base-100 shadow-xl mt-10 border border-red-500">
@@ -45,7 +42,7 @@ const Product = ({ product }) => {
                                 <MdVerifiedUser className='text-blue-600 ml-2' />
                             }
                         </p>
-                        <button onClick={() => handleAddToOrder(product)} className="btn btn-accent btn-sm">Book Now</button>
+                        <label htmlFor="booking-modal" onClick={() => setSelectedProduct(product)} className="btn btn-accent btn-sm">Book Now</label>
                     </div>
                 </div>
             </div>

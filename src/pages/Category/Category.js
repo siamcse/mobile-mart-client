@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import BookingModal from '../Shared/BookingModal/BookingModal';
 import Product from './Product';
 
 const Category = () => {
     const products = useLoaderData();
+    const [selectedProduct, setSelectedProduct] = useState(null);
+    const handleAddToOrder = product => {
+        console.log(product);
+    }
     return (
         <div className='my-12'>
             <h2 className='text-3xl text-center font-semibold'>Products {products.length}</h2>
@@ -12,7 +17,15 @@ const Category = () => {
                     products.map(product => <Product
                         key={product._id}
                         product={product}
+                        setSelectedProduct={setSelectedProduct}
                     ></Product>)
+                }
+            </div>
+            <div>
+                {
+                    selectedProduct && <BookingModal
+                        selectedProduct={selectedProduct}
+                    ></BookingModal>
                 }
             </div>
         </div>

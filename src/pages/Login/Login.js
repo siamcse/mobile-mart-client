@@ -1,6 +1,7 @@
 import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 import useToken from '../../hooks/useToken';
@@ -16,6 +17,11 @@ const Login = () => {
 
     const from = location.state?.from?.pathname || '/';
 
+    if (token) {
+
+        navigate(from, { replace: true });
+    }
+
     const handleLogin = data => {
         const { email, password } = data;
         login(email, password)
@@ -23,7 +29,7 @@ const Login = () => {
                 const user = result.user;
                 console.log(user);
                 setLoginEmail(user.email);
-                navigate(from, { replace: true });
+                toast.success('Login successfully');
             })
             .catch(e => console.error(e))
     };
@@ -33,9 +39,33 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                navigate(from, { replace: true });
+                const currentUser = {
+                    name: user.displayName,
+                    email: user.email,
+                    role: 'User'
+                };
+                saveUser(currentUser);
             })
             .catch(e => console.log(e))
+    };
+    //save google sign up user to database
+    const saveUser = (user) => {
+        console.log(user);
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                setLoginEmail(user?.email);
+                if (data.acknowledged) {
+                    toast.success('Login successfully');
+                }
+            })
     }
     return (
         <div className='flex justify-center items-center h-[600px]'>
