@@ -1,7 +1,9 @@
+import axios from 'axios';
 import React, { useContext } from 'react';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import Swal from 'sweetalert2';
 
-const BookingModal = ({ selectedProduct }) => {
+const BookingModal = ({ selectedProduct, setSelectedProduct }) => {
     const { user } = useContext(AuthContext);
     const { name, resellPrice, } = selectedProduct;
 
@@ -24,6 +26,18 @@ const BookingModal = ({ selectedProduct }) => {
             location
         };
         console.log(booking);
+        axios.post('http://localhost:5000/bookings', booking)
+            .then(res => {
+                if (res.data.acknowledged) {
+                    setSelectedProduct(null);
+                    Swal.fire(
+                        'Thank You!',
+                        `Your booking is ${productName} successful. Please go to My orders and pay for confirm.`,
+                        'success'
+                    );
+                }
+            })
+            .catch(e => console.log(e))
     }
     return (
         <div>
