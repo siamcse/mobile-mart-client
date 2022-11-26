@@ -13,7 +13,13 @@ const AdvertisedProduct = () => {
                 setAdvertisedProduct(data);
             })
     }, []);
-    
+
+    if (advertisedProduct.length <= 0) {
+        return <div>
+
+        </div>
+    }
+
     return (
         <div>
             {
@@ -32,7 +38,7 @@ const AdvertisedProduct = () => {
                     {
                         selectedProduct && <BookingModal
                             selectedProduct={selectedProduct}
-                                setSelectedProduct={setSelectedProduct}
+                            setSelectedProduct={setSelectedProduct}
                         ></BookingModal>
                     }
                 </div>

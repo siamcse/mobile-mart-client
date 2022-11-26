@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
+import { RiDeleteBin6Line } from 'react-icons/ri';
 import ConfirmationModal from '../../Shared/ConfirmationModal/ConfirmationModal';
 
 const AllBuyers = () => {
@@ -48,7 +49,9 @@ const AllBuyers = () => {
                                 <td>{buyer.email}</td>
 
                                 <td>
-                                    <label onClick={() => setDeletingBuyer(buyer)} htmlFor="popup-modal" className="btn bg-red-600 btn-sm ">Delete</label>
+                                    <label onClick={() => setDeletingBuyer(buyer)} htmlFor="popup-modal" className="btn btn-ghost btn-sm ">
+                                        <RiDeleteBin6Line className='text-red-600 text-xl' />
+                                    </label>
                                 </td>
                             </tr>)
                         }

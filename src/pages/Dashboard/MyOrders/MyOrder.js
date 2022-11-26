@@ -21,9 +21,6 @@ const MyOrder = () => {
         }
     });
 
-    const handlePayingOrder = order => {
-        console.log(order);
-    }
     const handleDeleteOrder = order => {
         axios.delete(`http://localhost:5000/bookings/${order._id}`)
             .then(() => {
@@ -31,13 +28,6 @@ const MyOrder = () => {
                 refetch();
             })
     }
-
-    // const [ordersProduct, setOrdersProduct] = useState([]);
-    // axios.get(`http://localhost:5000/bookings?email=${user?.email}`)
-    //     .then(res => {
-    //         setOrdersProduct(res.data);
-    //     })
-    //     .catch(e => console.error(e))
 
     return (
         <div>
@@ -68,7 +58,12 @@ const MyOrder = () => {
                                 <td>{order.productName}</td>
                                 <td>{order.price}</td>
                                 <td>
-                                    <Link to={`/dashboard/payment/${order._id}`}>Pay</Link>
+                                    {
+                                        order.paid ?
+                                        <button disabled className='italic text-green-500'>Paid</button>
+                                        :
+                                        <Link to={`/dashboard/payment/${order._id}`}>Pay</Link>
+                                    }
                                 </td>
                                 <td>
                                     <label onClick={() => setDeletingOrder(order)} htmlFor="popup-modal" className="btn btn-ghost">
@@ -81,17 +76,6 @@ const MyOrder = () => {
                     </tbody>
                 </table>
             </div>
-            {
-                payingOrder && <ConfirmationModal
-                    title={'Are you sure to Pay?'}
-                    message={`You are paying this order: ${payingOrder.productName}`}
-                    successModal={handlePayingOrder}
-                    modalData={payingOrder}
-                    closeModal={setPayingOrder}
-                    action={'Pay'}
-                >
-                </ConfirmationModal>
-            }
             {
                 deletingOrder && <ConfirmationModal
                     title={'Are you sure to delete?'}

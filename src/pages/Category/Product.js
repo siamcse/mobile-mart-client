@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { MdVerifiedUser } from "react-icons/md";
 
 const Product = ({ product, setSelectedProduct }) => {
-    const { name, email, image, originalPrice, location, description, categoryId, condition, resellPrice, posted } = product;
+    const { name, email, image, originalPrice, location, description, paid, condition, resellPrice, posted } = product;
 
     const [seller, setSeller] = useState({});
 
@@ -42,7 +42,12 @@ const Product = ({ product, setSelectedProduct }) => {
                                 <MdVerifiedUser className='text-blue-600 ml-2' />
                             }
                         </p>
-                        <label htmlFor="booking-modal" onClick={() => setSelectedProduct(product)} className="btn btn-accent btn-sm">Book Now</label>
+                        {
+                            paid ?
+                                <p className='text-green-500 text-xl font-semibold text-end'>Paid</p>
+                                :
+                                <label htmlFor="booking-modal" onClick={() => setSelectedProduct(product)} className="btn btn-accent btn-sm">Book Now</label>
+                        }
                     </div>
                 </div>
             </div>

@@ -82,14 +82,16 @@ const MyProduct = () => {
                                     </td>
                                     <td>
                                         {
-                                            !product.advertise ? <>
-                                                <label
-                                                className='text-red-500 cursor-pointer'
-                                                    htmlFor="popup-modal"
-                                                    onClick={() => setAdvertisingProduct(product)}
-                                                >Advertise</label>
-                                            </>
-                                                : <p className='text-green-500 italic'>Advertised</p>
+                                            !product.advertise ?
+                                                <>
+                                                    <button disabled={!product.isAvailable} className='btn btn-ghost'>
+                                                        <label
+                                                            htmlFor="popup-modal"
+                                                            onClick={() => setAdvertisingProduct(product)}
+                                                        >Advertise</label></button>
+                                                </>
+                                                :
+                                                <p className='text-green-500 italic'>Advertised</p>
                                         }
                                     </td>
                                     <td>

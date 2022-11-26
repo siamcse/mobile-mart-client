@@ -10,15 +10,14 @@ const Login = () => {
     const { login, popUpSignIn } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const googleProvider = new GoogleAuthProvider();
-    const navigate = useNavigate();
-    const location = useLocation();
     const [loginEmail, setLoginEmail] = useState('');
     const [token] = useToken(loginEmail);
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const from = location.state?.from?.pathname || '/';
 
     if (token) {
-
         navigate(from, { replace: true });
     }
 
