@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 
 const BookingModal = ({ selectedProduct, setSelectedProduct }) => {
     const { user } = useContext(AuthContext);
-    const { name, resellPrice, } = selectedProduct;
+    const { name, resellPrice, _id, image } = selectedProduct;
 
     const handleBooking = event => {
         event.preventDefault();
@@ -23,7 +23,9 @@ const BookingModal = ({ selectedProduct, setSelectedProduct }) => {
             productName,
             price,
             phone,
-            location
+            location,
+            productsId: _id,
+            image
         };
         console.log(booking);
         axios.post('http://localhost:5000/bookings', booking)

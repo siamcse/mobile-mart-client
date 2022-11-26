@@ -6,9 +6,7 @@ import Product from './Product';
 const Category = () => {
     const products = useLoaderData();
     const [selectedProduct, setSelectedProduct] = useState(null);
-    const handleAddToOrder = product => {
-        console.log(product);
-    }
+
     return (
         <div className='my-12'>
             <h2 className='text-3xl text-center font-semibold'>Products {products.length}</h2>

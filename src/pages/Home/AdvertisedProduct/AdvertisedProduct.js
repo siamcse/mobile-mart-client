@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Product from '../../Category/Product';
+import BookingModal from '../../Shared/BookingModal/BookingModal';
 
 const AdvertisedProduct = () => {
     const [advertisedProduct, setAdvertisedProduct] = useState([]);
+    const [selectedProduct, setSelectedProduct] = useState(null);
 
     useEffect(() => {
         fetch('http://localhost:5000/adproducts')
@@ -11,9 +13,7 @@ const AdvertisedProduct = () => {
                 setAdvertisedProduct(data);
             })
     }, []);
-    const handleAddToOrder = product => {
-        console.log(product);
-    }
+    
     return (
         <div>
             {
@@ -25,10 +25,16 @@ const AdvertisedProduct = () => {
                             advertisedProduct.map(product => product.isAvailable && <Product
                                 key={product._id}
                                 product={product}
-                                handleAddToOrder={handleAddToOrder}
+                                setSelectedProduct={setSelectedProduct}
                             ></Product>)
                         }
                     </div>
+                    {
+                        selectedProduct && <BookingModal
+                            selectedProduct={selectedProduct}
+                                setSelectedProduct={setSelectedProduct}
+                        ></BookingModal>
+                    }
                 </div>
             }
         </div>
