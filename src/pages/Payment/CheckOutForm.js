@@ -1,6 +1,7 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 
 const CheckOutForm = ({ booking }) => {
     const [clientSecret, setClientSecret] = useState("");
@@ -91,6 +92,9 @@ const CheckOutForm = ({ booking }) => {
                 .then(res => {
                     console.log(res.data);
                     if (res.data.insertedId) {
+                        Swal.fire(
+                            'Thank You',
+                            "Your purchase has been success", 'success');
                         setSuccess('Congrats!! Your payment is complete.');
                         setTransactionId(paymentIntent.id);
                     }

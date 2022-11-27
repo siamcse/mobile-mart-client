@@ -44,7 +44,7 @@ const Product = ({ product, setSelectedProduct }) => {
                         </p>
                         {
                             paid ?
-                                <p className='text-green-500 text-xl font-semibold text-end'>Paid</p>
+                                <p className='text-green-500 text-xl font-semibold text-end'>Sold Out</p>
                                 :
                                 <label htmlFor="booking-modal" onClick={() => setSelectedProduct(product)} className="btn btn-accent btn-sm">Book Now</label>
                         }
