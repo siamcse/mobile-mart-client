@@ -28,7 +28,11 @@ const BookingModal = ({ selectedProduct, setSelectedProduct }) => {
             image
         };
         console.log(booking);
-        axios.post('http://localhost:5000/bookings', booking)
+        axios.post('http://localhost:5000/bookings', booking, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
             .then(res => {
                 if (res.data.acknowledged) {
                     setSelectedProduct(null);

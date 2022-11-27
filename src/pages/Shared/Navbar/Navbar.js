@@ -31,6 +31,7 @@ const Navbar = () => {
                     <li><NavLink to='/login' className={({ isActive }) =>
                         isActive ? activeClassName : undefined
                     }><button onClick={handleLogOut}>LogOut</button></NavLink></li>
+                    <p className='text-lg outline rounded-lg px-1 hover:bg-slate-300 flex items-center justify-center'>{user?.displayName}</p>
                 </>
                 :
                 <li><NavLink to='/login' className={({ isActive }) =>
@@ -61,7 +62,7 @@ const Navbar = () => {
                 <div className="navbar-end">
                     <label tabIndex={2} htmlFor="dashboard-drawer" className="drawer-button btn btn-ghost lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
-                        </label>
+                    </label>
                 </div>
             </div>
         </div>

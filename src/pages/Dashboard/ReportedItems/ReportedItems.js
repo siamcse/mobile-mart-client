@@ -18,13 +18,12 @@ const ReportedItems = () => {
     const handleDeleteOrder = reportedProduct => {
         axios.delete(`http://localhost:5000/reportProducts/${reportedProduct._id}`)
             .then(() => {
-                toast.success(`${reportedProduct.name} is delete successful`);
                 refetch();
             })
 
         axios.delete(`http://localhost:5000/products/${reportedProduct.productId}`)
             .then(() => {
-                toast.success(`${reportedProduct.name} is delete successful from products`);
+                toast.success(`${reportedProduct.name} is delete successful from products and reported items`);
                 refetch();
             })
     }
