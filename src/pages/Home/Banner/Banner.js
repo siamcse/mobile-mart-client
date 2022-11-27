@@ -14,7 +14,7 @@ const Banner = () => {
         // </div>
         <div className="relative rounded-lg">
             <img
-                src="https://img.freepik.com/free-vector/isometric-mobile-phone-background-template_52683-7075.jpg?w=1060&t=st=1669295946~exp=1669296546~hmac=ac493be5c8b9c82fea0360c95ce2e4cb0b7634e0276770f59817c116a326143f"
+                src="https://img.freepik.com/free-photo/mobile-phone-cases-mockup-product-showcase_53876-96025.jpg?w=2000"
                 className="absolute inset-0 object-cover w-full h-full"
                 alt=""
             />

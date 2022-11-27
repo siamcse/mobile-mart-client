@@ -8,6 +8,8 @@ import useToken from '../../hooks/useToken';
 const SignUp = () => {
     const { createUser, profileUpdate } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const [signUpError, setSignUpError] = useState('');
+
     const [createUserEmail, setCreateUserEmail] = useState('');
     const [token] = useToken(createUserEmail);
 
@@ -17,17 +19,21 @@ const SignUp = () => {
         navigate('/');
     }
 
-    const handleSignUp = data => {
+    const handleSignUp = (data, event) => {
         const { email, password, name, role } = data;
+        setSignUpError('');
 
         createUser(email, password)
             .then(result => {
+                const user = result.user;
                 const userInfo = {
                     displayName: name
-                }
+                };
+                event.target.reset();
 
                 profileUpdate(userInfo)
-                    .then(result => {
+                    .then(() => {
+                        //save user to database
                         const currentUser = {
                             name,
                             email,
@@ -35,12 +41,16 @@ const SignUp = () => {
                         };
                         saveUser(currentUser);
                     })
-                    .catch(e => console.error(e))
+                    .catch(e => {
+                        console.error(e);
+                        setSignUpError(e);
+                    })
 
 
             })
             .catch(e => {
                 console.log(e);
+                setSignUpError(e);
             })
     };
     //save user to database
@@ -49,17 +59,16 @@ const SignUp = () => {
         fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
-                'content-type': 'application/json',
-                authorization: `bearer ${localStorage.getItem('accessToken')}`
+                'content-type': 'application/json'
             },
             body: JSON.stringify(user)
         })
             .then(res => res.json())
             .then(data => {
-                setCreateUserEmail(user?.email);
                 if (data.acknowledged) {
                     toast.success('Sign Up successfully');
                 }
+                setCreateUserEmail(user.email);
             })
     }
     return (
@@ -74,7 +83,7 @@ const SignUp = () => {
                         <select defaultValue='User' className="select select-bordered w-full max-w-md" {...register("role", {
                             required: 'Role is required'
                         })}>
-                            <option>User</option>
+                            <option value={"User"}>Buyer</option>
                             <option>Seller</option>
                         </select>
                         {errors.role && <p className='text-red-500'>{errors.role?.message}</p>}

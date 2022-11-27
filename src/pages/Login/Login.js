@@ -9,6 +9,7 @@ import useToken from '../../hooks/useToken';
 const Login = () => {
     const { login, popUpSignIn } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const [loginError, setLoginError] = useState('');
     const googleProvider = new GoogleAuthProvider();
     const [loginEmail, setLoginEmail] = useState('');
     const [token] = useToken(loginEmail);
@@ -23,6 +24,7 @@ const Login = () => {
 
     const handleLogin = data => {
         const { email, password } = data;
+        setLoginEmail('');
         login(email, password)
             .then(result => {
                 const user = result.user;
@@ -30,7 +32,7 @@ const Login = () => {
                 setLoginEmail(user.email);
                 toast.success('Login successfully');
             })
-            .catch(e => console.error(e))
+            .catch(e => setLoginError(e.message))
     };
 
     const handleGoogleSignIn = () => {
@@ -44,8 +46,9 @@ const Login = () => {
                     role: 'User'
                 };
                 saveUser(currentUser);
+
             })
-            .catch(e => console.log(e))
+            .catch(e => setLoginError(e.message))
     };
     //save google sign up user to database
     const saveUser = (user) => {
@@ -53,17 +56,16 @@ const Login = () => {
         fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
-                'content-type': 'application/json',
-                authorization: `bearer ${localStorage.getItem('accessToken')}`
+                'content-type': 'application/json'
             },
             body: JSON.stringify(user)
         })
             .then(res => res.json())
             .then(data => {
-                setLoginEmail(user?.email);
                 if (data.acknowledged) {
                     toast.success('Login successfully');
                 }
+                setLoginEmail(user?.email);
             })
     }
     return (
@@ -90,6 +92,7 @@ const Login = () => {
                         {errors.password && <p className='text-red-500'>{errors.password?.message}</p>}
                     </div>
                     <p className='text-xs mt-2'><span>Forgot Password?</span></p>
+                    {loginError && <p className='text-red-600 text-sm'>{loginError}</p>}
                     <input className="btn btn-accent mt-4 w-full max-w-md text-white" type="submit" value='Login' />
                 </form>
                 <p>New user? <Link to='/signup' className='text-green-500'>Please Sign Up</Link></p>

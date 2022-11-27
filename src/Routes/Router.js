@@ -14,7 +14,9 @@ import Login from "../pages/Login/Login";
 import Payment from "../pages/Payment/Payment";
 import ErrorPage from "../pages/Shared/ErrorPage/ErrorPage";
 import SignUp from "../pages/SignUp/SignUp";
+import AdminRoutes from "./AdminRoutes";
 import PrivateRoutes from "./PrivateRoutes";
+import SellerRoutes from "./SellerRoutes";
 
 export const router = createBrowserRouter([
     {
@@ -52,31 +54,31 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/allsellers',
-                element: <AllSellers />
+                element: <AdminRoutes><AllSellers /></AdminRoutes>
             },
             {
                 path: '/dashboard/allbuyers',
-                element: <AllBuyers />
+                element: <AdminRoutes><AllBuyers /></AdminRoutes>
             },
             {
                 path: '/dashboard/reporteditems',
-                element: <ReportedItems />
+                element: <AdminRoutes><ReportedItems /></AdminRoutes>
             },
             {
                 path: '/dashboard/addproduct',
-                element: <AddProducts />
+                element: <SellerRoutes><AddProducts /></SellerRoutes>
             },
             {
                 path: '/dashboard/myproducts',
-                element: <MyProduct />
+                element: <SellerRoutes><MyProduct /></SellerRoutes>
             },
             {
                 path: '/dashboard/mybuyers',
-                element: <MyBuyers />
+                element: <SellerRoutes><MyBuyers /></SellerRoutes>
             },
             {
                 path: '/dashboard/payment/:id',
-                element: <Payment/>,
+                element: <Payment />,
                 loader: ({ params }) => fetch(`http://localhost:5000/bookings/${params.id}`)
             },
         ]
