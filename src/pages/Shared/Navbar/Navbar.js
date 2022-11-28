@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
@@ -9,7 +10,9 @@ const Navbar = () => {
 
     const handleLogOut = () => {
         logOut()
-            .then(() => { })
+            .then(() => {
+                toast.success('Logout Successful');
+            })
             .catch(e => console.error(e))
     }
 
@@ -28,9 +31,9 @@ const Navbar = () => {
                     <li><NavLink to='/dashboard' className={({ isActive }) =>
                         isActive ? activeClassName : undefined
                     }>Dashboard</NavLink></li>
-                    <li><NavLink to='/login' className={({ isActive }) =>
-                        isActive ? activeClassName : undefined
-                    }><button onClick={handleLogOut}>LogOut</button></NavLink></li>
+                    <li>
+                        <button onClick={handleLogOut}>LogOut</button>
+                    </li>
                     <p className='text-lg outline rounded-lg px-1 hover:bg-slate-300 flex items-center justify-center'>{user?.displayName}</p>
                 </>
                 :

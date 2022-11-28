@@ -5,11 +5,14 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import useTitle from '../../../hooks/useTitle';
 
 const AddProducts = () => {
     const { user } = useContext(AuthContext);
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
+
+    useTitle('Add Product')
 
     const currentDate = new Date();
     const date = format(currentDate, 'PPpp');

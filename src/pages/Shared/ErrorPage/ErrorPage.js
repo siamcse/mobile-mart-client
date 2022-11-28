@@ -1,11 +1,14 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate, useRouteError } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import useTitle from '../../../hooks/useTitle';
 
 const ErrorPage = () => {
     const error = useRouteError();
-    const { user, logOut } = useContext(AuthContext);
+    const { logOut } = useContext(AuthContext);
     const navigate = useNavigate();
+
+    useTitle('Error')
 
     const handleLogOut = () => {
         logOut()
@@ -23,7 +26,7 @@ const ErrorPage = () => {
                 </p>
                 <p>Please <button onClick={handleLogOut} className='btn btn-ghost'>LogOut</button> and Sign In again</p>
             </div>
-            <Link to='/'><button className='btn'>Home</button></Link>
+            <Link to='/'><button className='btn'>Back to Home</button></Link>
         </div>
     );
 };

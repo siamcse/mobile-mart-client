@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useLoaderData } from 'react-router-dom';
+import useTitle from '../../hooks/useTitle';
 import BookingModal from '../Shared/BookingModal/BookingModal';
 import ConfirmationModal from '../Shared/ConfirmationModal/ConfirmationModal';
 import Product from './Product';
@@ -10,6 +11,7 @@ const Category = () => {
     const products = useLoaderData();
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [reportProduct, setReportProduct] = useState(null);
+    useTitle('Products')
 
     const handleReportProduct = product => {
         console.log(product);

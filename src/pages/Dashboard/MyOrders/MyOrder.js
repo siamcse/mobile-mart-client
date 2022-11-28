@@ -5,12 +5,14 @@ import toast from 'react-hot-toast';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import useTitle from '../../../hooks/useTitle';
 import ConfirmationModal from '../../Shared/ConfirmationModal/ConfirmationModal';
 
 const MyOrder = () => {
     const { user } = useContext(AuthContext);
     const [deletingOrder, setDeletingOrder] = useState(null);
-    const [payingOrder, setPayingOrder] = useState(null);
+
+    useTitle('My Orders')
 
     const { data: ordersProduct = [], refetch } = useQuery({
         queryKey: ['bookings', user?.email],

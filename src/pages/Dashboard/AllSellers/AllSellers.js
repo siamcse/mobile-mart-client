@@ -2,11 +2,13 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { RiDeleteBin6Line } from 'react-icons/ri';
+import useTitle from '../../../hooks/useTitle';
 import ConfirmationModal from '../../Shared/ConfirmationModal/ConfirmationModal';
 
 const AllSellers = () => {
     const [deletingSeller, setDeletingSeller] = useState(null);
     const [verifyingSeller, setVerifyingSeller] = useState(null);
+    useTitle('All Sellers')
 
     const { data: allSellers = [], refetch } = useQuery({
         queryKey: ['users'],

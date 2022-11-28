@@ -1,16 +1,17 @@
-import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../../contexts/AuthProvider';
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useQuery } from '@tanstack/react-query';
-import { async } from '@firebase/util';
 import ConfirmationModal from '../../Shared/ConfirmationModal/ConfirmationModal';
 import toast from 'react-hot-toast';
+import useTitle from '../../../hooks/useTitle';
 
 const MyProduct = () => {
     const { user } = useContext(AuthContext);
     const [deletingProduct, setDeletingProduct] = useState(null);
     const [advertisingProduct, setAdvertisingProduct] = useState(null);
+
+    useTitle('My Products');
 
     const { data: products = [], refetch } = useQuery({
         queryKey: ['products', user?.email],

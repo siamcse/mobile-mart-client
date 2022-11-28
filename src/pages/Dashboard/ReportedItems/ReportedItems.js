@@ -3,10 +3,14 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { RiDeleteBin6Line } from 'react-icons/ri';
+import useTitle from '../../../hooks/useTitle';
 import ConfirmationModal from '../../Shared/ConfirmationModal/ConfirmationModal';
 
 const ReportedItems = () => {
     const [deleteReportProduct, setDeleteReportProduct] = useState(null);
+
+    useTitle('Reported Items')
+
     const { data: reportedProducts = [], refetch } = useQuery({
         queryKey: ['reportProducts'],
         queryFn: async () => {

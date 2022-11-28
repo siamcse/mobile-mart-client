@@ -18,7 +18,6 @@ adminPassword: abu.siam
 8. After login Seller, he can add product, see my product and delete product.
 9. Admin can see all seller, all buyer and report items.
 10. Admin can delete report items from product.
-11. 
 
 ## Uses of Package
 ```

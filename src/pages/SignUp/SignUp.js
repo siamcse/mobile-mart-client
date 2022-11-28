@@ -3,12 +3,15 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
+import useTitle from '../../hooks/useTitle';
 import useToken from '../../hooks/useToken';
 
 const SignUp = () => {
     const { createUser, profileUpdate } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [signUpError, setSignUpError] = useState('');
+
+    useTitle('Sign Up')
 
     const [createUserEmail, setCreateUserEmail] = useState('');
     const [token] = useToken(createUserEmail);
@@ -20,14 +23,12 @@ const SignUp = () => {
     }
 
     const handleSignUp = (data, event) => {
-        const { email, password, name, role } = data;
         setSignUpError('');
 
-        createUser(email, password)
+        createUser(data.email, data.password)
             .then(result => {
-                const user = result.user;
                 const userInfo = {
-                    displayName: name
+                    displayName: data.name
                 };
                 event.target.reset();
 
@@ -35,22 +36,22 @@ const SignUp = () => {
                     .then(() => {
                         //save user to database
                         const currentUser = {
-                            name,
-                            email,
-                            role
+                            name: data.name,
+                            email: data.email,
+                            role: data.role
                         };
                         saveUser(currentUser);
                     })
                     .catch(e => {
                         console.error(e);
-                        setSignUpError(e);
+                        setSignUpError(e.message);
                     })
 
 
             })
             .catch(e => {
                 console.log(e);
-                setSignUpError(e);
+                setSignUpError(e.message);
             })
     };
     //save user to database
@@ -116,11 +117,10 @@ const SignUp = () => {
                         })} placeholder="password" />
                         {errors.password && <p className='text-red-500'>{errors.password?.message}</p>}
                     </div>
-                    <p className='text-xs mt-2'><span>Forgot Password?</span></p>
+                    {signUpError && <p className='text-red-600 text-sm'>{signUpError}</p>}
                     <input className="btn btn-accent mt-4 w-full max-w-md text-white" type="submit" value='Sign Up' />
                 </form>
                 <p>Already have an account <Link to='/login' className='text-green-500'>Please Login</Link></p>
-                <button className='btn btn-outline mt-4 w-full max-w-md'>Sign in with Google</button>
             </div>
         </div>
     );
