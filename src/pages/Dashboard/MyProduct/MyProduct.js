@@ -52,7 +52,7 @@ const MyProduct = () => {
 
     return (
         <div>
-            <h2 className='text-2xl my-8'>My Products {products.length}</h2>
+            <h2 className='text-2xl my-8'>My Products</h2>
             <div>
                 <div className="overflow-x-auto">
                     <table className="table w-full">

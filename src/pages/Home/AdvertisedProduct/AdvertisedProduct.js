@@ -7,7 +7,11 @@ const AdvertisedProduct = () => {
     const [selectedProduct, setSelectedProduct] = useState(null);
 
     useEffect(() => {
-        fetch('http://localhost:5000/adproducts')
+        fetch('http://localhost:5000/adproducts', {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
             .then(res => res.json())
             .then(data => {
                 setAdvertisedProduct(data);
