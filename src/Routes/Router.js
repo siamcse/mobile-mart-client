@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../layout/DashboardLayout";
 import Main from "../layout/Main";
+import Blog from "../pages/Blog/Blog";
 import Category from "../pages/Category/Category";
 import AddProducts from "../pages/Dashboard/AddProducts/AddProducts";
 import AllBuyers from "../pages/Dashboard/AllBuyers/AllBuyers";
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
                 path: '/category/:id',
                 element: <PrivateRoutes><Category /></PrivateRoutes>,
                 loader: ({ params }) => fetch(`https://mobile-mart-server-siamcse.vercel.app/products/${params.id}`)
+            },
+            {
+                path: '/blog',
+                element: <Blog />
             }
         ]
     },
