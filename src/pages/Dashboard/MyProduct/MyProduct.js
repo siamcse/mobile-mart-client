@@ -39,7 +39,10 @@ const MyProduct = () => {
     const handleAdvertisingProduct = product => {
         console.log(product);
         fetch(`https://mobile-mart-server-siamcse.vercel.app/products/${product._id}`, {
-            method: 'PUT'
+            method: 'PUT',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
         })
             .then(res => res.json())
             .then(data => {
