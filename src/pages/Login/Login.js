@@ -53,7 +53,7 @@ const Login = () => {
     //save google sign up user to database
     const saveUser = (user) => {
         console.log(user);
-        fetch('http://localhost:5000/users', {
+        fetch('https://mobile-mart-server-siamcse.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

@@ -28,7 +28,7 @@ const BookingModal = ({ selectedProduct, setSelectedProduct }) => {
             image
         };
         console.log(booking);
-        axios.post('http://localhost:5000/bookings', booking, {
+        axios.post('https://mobile-mart-server-siamcse.vercel.app/bookings', booking, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
             }

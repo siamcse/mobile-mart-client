@@ -1,5 +1,9 @@
 # Mobile Mart-
-Live Website: 
+Live Website: https://mobile-mart-914e8.web.app
+
+adminEmail: abusiam06@gmail.com
+
+adminPassword: abu.siam
 
 
 ## Project Description

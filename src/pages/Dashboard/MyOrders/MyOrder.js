@@ -15,7 +15,7 @@ const MyOrder = () => {
     const { data: ordersProduct = [], refetch } = useQuery({
         queryKey: ['bookings', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/bookings?email=${user?.email}`, {
+            const res = await fetch(`https://mobile-mart-server-siamcse.vercel.app/bookings?email=${user?.email}`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -26,7 +26,7 @@ const MyOrder = () => {
     });
 
     const handleDeleteOrder = order => {
-        axios.delete(`http://localhost:5000/bookings/${order._id}`, {
+        axios.delete(`https://mobile-mart-server-siamcse.vercel.app/bookings/${order._id}`, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
             }

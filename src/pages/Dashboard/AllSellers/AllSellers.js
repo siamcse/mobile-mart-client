@@ -11,14 +11,14 @@ const AllSellers = () => {
     const { data: allSellers = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/users?role=Seller`);
+            const res = await fetch(`https://mobile-mart-server-siamcse.vercel.app/users?role=Seller`);
             const data = await res.json();
             return data;
         }
     });
 
     const handleVerify = seller => {
-        fetch(`http://localhost:5000/users/seller/${seller._id}`, {
+        fetch(`https://mobile-mart-server-siamcse.vercel.app/users/seller/${seller._id}`, {
             method: 'PUT'
         })
             .then(res => res.json())
@@ -33,7 +33,7 @@ const AllSellers = () => {
 
     const handleDeleteSeller = seller => {
         console.log(seller);
-        fetch(`http://localhost:5000/users/${seller._id}`, {
+        fetch(`https://mobile-mart-server-siamcse.vercel.app/users/${seller._id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())

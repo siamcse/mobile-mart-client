@@ -18,7 +18,7 @@ const Category = () => {
             name, email, seller, resellPrice,
             productId: _id
         };
-        axios.post('http://localhost:5000/reportProducts', reportProduct)
+        axios.post('https://mobile-mart-server-siamcse.vercel.app/reportProducts', reportProduct)
             .then(result => {
                 console.log(result.data);
                 toast.success(result.data.message);

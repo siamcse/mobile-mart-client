@@ -3,11 +3,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Categories = () => {
-    
+
     const { data: categories = [] } = useQuery({
         queryKey: ['categories'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/categories');
+            const res = await fetch('https://mobile-mart-server-siamcse.vercel.app/categories');
             const data = await res.json();
             return data;
         }
@@ -22,8 +22,8 @@ const Categories = () => {
                         key={category._id}
                         to={`/category/${category._id}`}
                         className='card w-80 mx-auto border-2 shadow-xl rounded-lg'>
-                            <img src={category.image} alt="" />
-                        
+                        <img src={category.image} alt="" />
+
                     </Link>)
                 }
             </div>

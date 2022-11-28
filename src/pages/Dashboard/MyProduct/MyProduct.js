@@ -15,7 +15,7 @@ const MyProduct = () => {
     const { data: products = [], refetch } = useQuery({
         queryKey: ['products', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/products?email=${user?.email}`);
+            const res = await fetch(`https://mobile-mart-server-siamcse.vercel.app/products?email=${user?.email}`);
             const data = await res.json();
             return data;
         }
@@ -23,7 +23,7 @@ const MyProduct = () => {
 
     const handleDeleteProduct = product => {
         console.log(product);
-        fetch(`http://localhost:5000/products/${product._id}`, {
+        fetch(`https://mobile-mart-server-siamcse.vercel.app/products/${product._id}`, {
             method: 'DELETE',
         })
             .then(res => res.json())
@@ -37,7 +37,7 @@ const MyProduct = () => {
 
     const handleAdvertisingProduct = product => {
         console.log(product);
-        fetch(`http://localhost:5000/products/${product._id}`, {
+        fetch(`https://mobile-mart-server-siamcse.vercel.app/products/${product._id}`, {
             method: 'PUT'
         })
             .then(res => res.json())

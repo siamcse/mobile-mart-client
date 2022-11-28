@@ -10,14 +10,14 @@ const AllBuyers = () => {
     const { data: allBuyers = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/users?role=User`);
+            const res = await fetch(`https://mobile-mart-server-siamcse.vercel.app/users?role=User`);
             const data = await res.json();
             return data;
         }
     });
 
     const handleDeleteSeller = buyer => {
-        fetch(`http://localhost:5000/users/${buyer._id}`, {
+        fetch(`https://mobile-mart-server-siamcse.vercel.app/users/${buyer._id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())

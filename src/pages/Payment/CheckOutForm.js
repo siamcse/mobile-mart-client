@@ -14,7 +14,7 @@ const CheckOutForm = ({ booking }) => {
     const { _id, price, name, email, productsId } = booking;
 
     useEffect(() => {
-        fetch('http://localhost:5000/create-payment-intent', {
+        fetch('https://mobile-mart-server-siamcse.vercel.app/create-payment-intent', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -83,7 +83,7 @@ const CheckOutForm = ({ booking }) => {
                 email
             };
 
-            axios.post('http://localhost:5000/payments', payment, {
+            axios.post('https://mobile-mart-server-siamcse.vercel.app/payments', payment, {
                 headers: {
                     'Content-Type': 'application/json',
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`

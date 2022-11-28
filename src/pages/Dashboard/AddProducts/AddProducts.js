@@ -19,7 +19,7 @@ const AddProducts = () => {
     const { data: categories = [] } = useQuery({
         queryKey: ['categories'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/categories');
+            const res = await fetch('https://mobile-mart-server-siamcse.vercel.app/categories');
             const data = await res.json();
             return data;
         }
@@ -60,7 +60,7 @@ const AddProducts = () => {
                         advertise: false
                     };
                     console.log(product);
-                    fetch('http://localhost:5000/products', {
+                    fetch('https://mobile-mart-server-siamcse.vercel.app/products', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json'

@@ -7,7 +7,7 @@ const AdvertisedProduct = () => {
     const [selectedProduct, setSelectedProduct] = useState(null);
 
     useEffect(() => {
-        fetch('http://localhost:5000/adproducts', {
+        fetch('https://mobile-mart-server-siamcse.vercel.app/adproducts', {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
             }

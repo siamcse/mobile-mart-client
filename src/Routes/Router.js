@@ -39,7 +39,7 @@ export const router = createBrowserRouter([
             {
                 path: '/category/:id',
                 element: <PrivateRoutes><Category /></PrivateRoutes>,
-                loader: ({ params }) => fetch(`http://localhost:5000/products/${params.id}`)
+                loader: ({ params }) => fetch(`https://mobile-mart-server-siamcse.vercel.app/products/${params.id}`)
             }
         ]
     },
@@ -79,7 +79,7 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/payment/:id',
                 element: <Payment />,
-                loader: ({ params }) => fetch(`http://localhost:5000/bookings/${params.id}`, {
+                loader: ({ params }) => fetch(`https://mobile-mart-server-siamcse.vercel.app/bookings/${params.id}`, {
                     headers: {
                         authorization: `Bearer ${localStorage.getItem('accessToken')}`
                     }

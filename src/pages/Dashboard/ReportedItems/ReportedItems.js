@@ -10,18 +10,18 @@ const ReportedItems = () => {
     const { data: reportedProducts = [], refetch } = useQuery({
         queryKey: ['reportProducts'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/reportProducts');
+            const res = await fetch('https://mobile-mart-server-siamcse.vercel.app/reportProducts');
             const data = await res.json();
             return data;
         }
     });
     const handleDeleteOrder = reportedProduct => {
-        axios.delete(`http://localhost:5000/reportProducts/${reportedProduct._id}`)
+        axios.delete(`https://mobile-mart-server-siamcse.vercel.app/reportProducts/${reportedProduct._id}`)
             .then(() => {
                 refetch();
             })
 
-        axios.delete(`http://localhost:5000/products/${reportedProduct.productId}`)
+        axios.delete(`https://mobile-mart-server-siamcse.vercel.app/products/${reportedProduct.productId}`)
             .then(() => {
                 toast.success(`${reportedProduct.name} is delete successful from products and reported items`);
                 refetch();
