@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { MdVerifiedUser } from "react-icons/md";
-import useTitle from '../../hooks/useTitle';
 
 const Product = ({ product, setSelectedProduct, setReportProduct }) => {
     const { name, email, image, originalPrice, location, description, paid, condition, resellPrice, posted } = product;
