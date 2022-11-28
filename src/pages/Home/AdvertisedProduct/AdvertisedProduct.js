@@ -28,7 +28,7 @@ const AdvertisedProduct = () => {
         <>
             {
                 advertisedProduct &&
-                <div className='my-12'>
+                <div className='my-20'>
                     <h2 className='text-3xl text-center font-semibold'>Advertised Products</h2>
                     <div className='lg:w-3/4 mx-auto'>
                         {
