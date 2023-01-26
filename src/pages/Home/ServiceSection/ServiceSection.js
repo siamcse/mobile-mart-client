@@ -2,7 +2,7 @@ import React from 'react';
 
 const ServiceSection = () => {
     return (
-        <div className='my-20'>
+        <div className='my-20 container'>
             <img src="https://cdn.shopify.com/s/files/1/0083/6380/2720/files/E-store_Web_Strip_BFSS.png?v=1669293050" alt="" />
         </div>
     );
