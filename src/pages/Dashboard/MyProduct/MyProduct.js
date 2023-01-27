@@ -56,39 +56,37 @@ const MyProduct = () => {
 
     return (
         <div>
-            <h2 className='text-2xl my-8'>My Products</h2>
-            <div>
-                <div className="overflow-x-auto">
-                    <table className="table w-full">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Name</th>
-                                <th>Resell Price</th>
-                                <th>Sales Status</th>
-                                <th>Advertise</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+            <body class="flex items-center justify-center">
+                <div class="container">
+                    <h2 className='text-2xl my-8'>My Products</h2>
+                    <table class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5">
+                        <thead class="text-white">
                             {
-                                products.map((product, i) => <tr
-                                    key={product._id}
-                                    className="hover">
-                                    <th>{i + 1}</th>
-                                    <td>{product.name}</td>
-                                    <td>{product.resellPrice}</td>
-                                    <td>
+                                products.map(product => <tr key={product._id} class="bg-teal-400 flex flex-col flex-nowrap sm:table-row rounded-l-lg sm:rounded-none mb-4 sm:mb-0">
+                                    <th class="p-3 text-left">Name</th>
+                                    <th class="p-3 text-left">Resell Price</th>
+                                    <th class="p-3 text-left">Sales Status</th>
+                                    <th class="p-3 text-left">Advertise</th>
+                                    <th class="p-3 text-left" width="110px">Actions</th>
+                                </tr>)
+                            }
+                        </thead>
+                        <tbody class="flex-1 sm:flex-none">
+                            {
+                                products.map(product => <tr key={product._id} class="flex flex-col flex-nowrap sm:table-row mb-4 sm:mb-0">
+                                    <td class="border-grey-light border hover:bg-gray-100 p-3">{product.name}</td>
+                                    <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">{product.resellPrice}</td>
+                                    <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">
                                         {
                                             product.isAvailable ?
                                                 'Available' : 'Sold'
                                         }
                                     </td>
-                                    <td>
+                                    <td class="border-grey-light border hover:bg-gray-100 p-2 truncate">
                                         {
                                             !product.advertise ?
                                                 <>
-                                                    <button disabled={!product.isAvailable} className='btn btn-ghost'>
+                                                    <button disabled={!product.isAvailable} className='bg-primary text-white p-1 rounded-md'>
                                                         <label
                                                             htmlFor="popup-modal"
                                                             onClick={() => setAdvertisingProduct(product)}
@@ -98,19 +96,15 @@ const MyProduct = () => {
                                                 <p className='text-green-500 italic'>Advertised</p>
                                         }
                                     </td>
-                                    <td>
-                                        <label
-                                            onClick={() => setDeletingProduct(product)} htmlFor="popup-modal"
-                                            className='btn btn-ghost'>
-                                            <RiDeleteBin6Line className='text-red-600 text-xl' />
-                                        </label>
-                                    </td>
+                                    <td class="border-grey-light border hover:bg-gray-100 p-3 text-red-400 hover:text-red-600 cursor-pointer"><label onClick={() => setDeletingProduct(product)} htmlFor="popup-modal" className="cursor-pointer">
+                                        <RiDeleteBin6Line className='text-red-600 text-2xl' />
+                                    </label></td>
                                 </tr>)
                             }
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </body>
             {
                 deletingProduct && <ConfirmationModal
                     title={'Are you sure to delete?'}

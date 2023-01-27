@@ -48,43 +48,40 @@ const AllSellers = () => {
     }
     return (
         <div>
-            <h2 className='text-2xl my-8'>All Sellers</h2>
-            <div className="overflow-x-auto">
-                <table className="table w-full">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Verify</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            allSellers.map((seller, i) => <tr className='hover' key={seller._id}>
-                                <th>{i + 1}</th>
-                                <td>{seller.name}</td>
-                                <td>{seller.email}</td>
-                                {
-                                    seller.verified ?
-                                        <td>Verified</td>
-                                        :
-                                        <td>
-                                            <label onClick={() => setVerifyingSeller(seller)} htmlFor="popup-modal" className="btn btn-accent text-white btn-sm ">Verify</label>
-                                        </td>
-                                }
-                                <td>
-                                    <label onClick={() => setDeletingSeller(seller)} htmlFor="popup-modal" className="btn btn-ghost">
-                                        <RiDeleteBin6Line className='text-red-600 text-xl' />
-                                    </label>
-                                </td>
-                            </tr>)
-                        }
-
-                    </tbody>
-                </table>
-            </div>
+            <body class="flex items-center justify-center">
+                <div class="container">
+                    <h2 className='text-2xl my-8'>All Sellers</h2>
+                    <table class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5">
+                        <thead class="text-white">
+                            {
+                                allSellers.map(seller => <tr key={seller._id} class="bg-teal-400 flex flex-col flex-nowrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+                                    <th class="p-3 text-left">Name</th>
+                                    <th class="p-3 text-left">Email</th>
+                                    <th class="p-3 text-left">Verify</th>
+                                    <th class="p-3 text-left" width="110px">Actions</th>
+                                </tr>)
+                            }
+                        </thead>
+                        <tbody class="flex-1 sm:flex-none">
+                            {
+                                allSellers.map(seller => <tr key={seller._id} class="flex flex-col flex-nowrap sm:table-row mb-2 sm:mb-0">
+                                    <td class="border-grey-light border hover:bg-gray-100 p-3">{seller.name}</td>
+                                    <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">{seller.email}</td>
+                                    {
+                                        seller.verified ?
+                                            <td class="border-grey-light border italic hover:bg-gray-100 p-3 truncate">Verified</td>
+                                            :
+                                            <td class="border-grey-light border hover:bg-gray-100 p-3 truncate"><label onClick={() => setVerifyingSeller(seller)} htmlFor="popup-modal" className="btn btn-accent btn-xs text-white ">Verify</label></td>
+                                    }
+                                    <td class="border-grey-light border hover:bg-gray-100 p-3 text-red-400 hover:text-red-600 cursor-pointer"><label onClick={() => setDeletingSeller(seller)} htmlFor="popup-modal" className="cursor-pointer">
+                                        <RiDeleteBin6Line className='text-red-600 text-2xl' />
+                                    </label></td>
+                                </tr>)
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </body>
             {
                 deletingSeller && <ConfirmationModal
                     title={'Are You sure to delete?'}

@@ -41,51 +41,50 @@ const MyOrder = () => {
 
     return (
         <div>
-            <h2 className='text-2xl my-8'>My Orders</h2>
-            <div className="overflow-x-auto">
-                <table className="table w-full">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Image</th>
-                            <th>Name</th>
-                            <th>Price</th>
-                            <th>Pay</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            ordersProduct.map((order, i) => <tr key={order._id}>
-                                <th>{i + 1}</th>
-                                <td>
-                                    <div className="avatar">
-                                        <div className="rounded w-20 h-20">
-                                            <img src={order.image} alt="" />
+            <body class="flex items-center justify-center">
+                <div class="container">
+                    <h2 className='text-2xl my-8'>My Orders</h2>
+                    <table class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5">
+                        <thead class="text-white">
+                            {
+                                ordersProduct.map(product => <tr key={product._id} class="bg-teal-400 flex flex-col flex-nowrap sm:table-row rounded-l-lg sm:rounded-none mb-4 sm:mb-0">
+                                    <th class="p-3 text-left h-24 sm:h-0">Image</th>
+                                    <th class="p-3 text-left">Name</th>
+                                    <th class="p-3 text-left">Price</th>
+                                    <th class="p-3 text-left">Pay</th>
+                                    <th class="p-3 text-left" width="110px">Actions</th>
+                                </tr>)
+                            }
+                        </thead>
+                        <tbody class="flex-1 sm:flex-none">
+                            {
+                                ordersProduct.map(product => <tr key={product._id} class="flex flex-col flex-nowrap sm:table-row mb-4 sm:mb-0">
+                                    <td class="border-grey-light border hover:bg-gray-100 p-1 sm:p-3">
+                                        <div className="avatar">
+                                            <div className="rounded w-20 h-20">
+                                                <img src={product.image} alt="" />
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td>{order.productName}</td>
-                                <td>{order.price}</td>
-                                <td>
-                                    {
-                                        order.paid ?
-                                            <button disabled className='italic text-green-500'>Paid</button>
-                                            :
-                                            <Link to={`/dashboard/payment/${order._id}`}>Pay</Link>
-                                    }
-                                </td>
-                                <td>
-                                    <label onClick={() => setDeletingOrder(order)} htmlFor="popup-modal" className="btn btn-ghost">
-                                        <RiDeleteBin6Line className='text-red-600 text-xl' />
-                                    </label>
-                                </td>
-                            </tr>
-                            )
-                        }
-                    </tbody>
-                </table>
-            </div>
+                                    </td>
+                                    <td class="border-grey-light border hover:bg-gray-100 p-3">{product.productName}</td>
+                                    <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">{product.price}</td>
+                                    <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">
+                                        {
+                                            product.paid ?
+                                                <button disabled className='italic text-green-500'>Paid</button>
+                                                :
+                                                <Link to={`/dashboard/payment/${product._id}`}>Pay</Link>
+                                        }
+                                    </td>
+                                    <td class="border-grey-light border hover:bg-gray-100 p-3 text-red-400 hover:text-red-600 cursor-pointer"><label onClick={() => setDeletingOrder(product)} htmlFor="popup-modal" className="cursor-pointer">
+                                        <RiDeleteBin6Line className='text-red-600 text-2xl' />
+                                    </label></td>
+                                </tr>)
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </body>
             {
                 deletingOrder && <ConfirmationModal
                     title={'Are you sure to delete?'}

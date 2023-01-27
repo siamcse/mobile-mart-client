@@ -14,8 +14,8 @@ const DashboardChild = () => {
             {
                 !isAdmin && !isSeller &&
                 <>
-                    <Link to='/dashboard/allsellers' className='py-3 px-3 flex items-center hover:bg-primary hover:text-white'>
-                        <span className=' text-sm'>All Sellers</span>
+                    <Link to='/dashboard/myorder' className='py-3 px-3 flex items-center hover:bg-primary hover:text-white'>
+                        <span className=' text-sm'>My Orders</span>
                     </Link>
                 </>
 
@@ -23,13 +23,13 @@ const DashboardChild = () => {
             {
                 !isAdmin && isSeller &&
                 <>
-                    <Link to='/dashboard/allsellers' className='py-3 px-3 flex items-center hover:bg-primary hover:text-white'>
+                    <Link to='/dashboard/addproduct' className='py-3 px-3 flex items-center hover:bg-primary hover:text-white'>
                         <span className=' text-sm'>Add Product</span>
                     </Link>
-                    <Link to='/dashboard/allsellers' className='py-3 px-3 flex items-center hover:bg-primary hover:text-white'>
+                    <Link to='/dashboard/myproducts' className='py-3 px-3 flex items-center hover:bg-primary hover:text-white'>
                         <span className=' text-sm'>My Products</span>
                     </Link>
-                    <Link to='/dashboard/allsellers' className='py-3 px-3 flex items-center hover:bg-primary hover:text-white'>
+                    <Link to='/dashboard/mybuyers' className='py-3 px-3 flex items-center hover:bg-primary hover:text-white'>
                         <span className=' text-sm'>My Buyers</span>
                     </Link>
                 </>
@@ -43,7 +43,7 @@ const DashboardChild = () => {
                     <Link to='/dashboard/allbuyers' className='py-3 px-3 flex items-center hover:bg-primary hover:text-white'>
                         <span className='text-sm'>All Buyers</span>
                     </Link>
-                    <Link to='/dashboard/allsellers' className='py-3 px-3 flex items-center hover:bg-primary hover:text-white'>
+                    <Link to='/dashboard/reporteditems' className='py-3 px-3 flex items-center hover:bg-primary hover:text-white'>
                         <span className='text-sm'>Reported Items</span>
                     </Link>
                 </>

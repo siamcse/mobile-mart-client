@@ -9,7 +9,7 @@ import DashboardChild from './DashboardChild';
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
-    const [navbarOpen, setNavbarOpen] = useState(true);
+    const [navbarOpen, setNavbarOpen] = useState(false);
 
     const handleLogOut = () => {
         logOut()
@@ -52,12 +52,20 @@ const Navbar = () => {
                         <div className='text-xs leading-3 hover:text-primary transition'>Cart</div>
                         <span className='absolute -right-3 -top-1 h-5 w-5 bg-primary text-white rounded-full flex items-center justify-center'>8</span>
                     </button>
-                    <button className='text-center  text-gray-700  relative'>
-                        <div className='text-2xl ml-3'>
-                            <FaUserAlt className='text-center'></FaUserAlt>
+                    {
+                        user?.email &&
+                        <div className="dropdown dropdown-left">
+                            <label tabIndex={0} className="text-center  text-gray-700  relative"><div className='text-2xl ml-3'>
+                                <FaUserAlt className='text-center'></FaUserAlt>
+                            </div>
+                                <div className='text-xs leading-3 hover:text-primary transition'>Account</div></label>
+                            <div tabIndex={0} className="dropdown-content menu items-center justify-between p-3 shadow bg-base-100 rounded-md divide-y divide-slate-600 divide-dashed">
+                                <p>Profile</p>
+                                <p className='capitalize py-3'>{user?.email.split('@')[0]}</p>
+                                <button onClick={handleLogOut} className='py-3 btn bg-primary'>LogOut</button>
+                            </div>
                         </div>
-                        <div className='text-xs leading-3 hover:text-primary transition'>Account</div>
-                    </button>
+                    }
 
                 </div>
 
@@ -114,10 +122,12 @@ const Navbar = () => {
                                 }
                             </div>
                             {
-                                user?.email ?
-                                    <div className='text-gray-200 hover:text-white transition'><button onClick={handleLogOut}>LogOut</button></div>
-                                    :
+                                !user?.email &&
+                                <>
                                     <Link to='/login' className='text-gray-200 hover:text-white transition'>Login</Link>
+                                    <Link to='/signup' className='text-gray-200 hover:text-white transition'>Sign Up</Link>
+                                </>
+
                             }
                         </div>
                     </div>
@@ -203,10 +213,11 @@ const Navbar = () => {
                                     </div>
                                 }
                                 {
-                                    user?.email ?
-                                        <div className='text-gray-800  transition'><button onClick={handleLogOut}>LogOut</button></div>
-                                        :
+                                    !user?.email &&
+                                    <>
                                         <Link to='/login' className='text-gray-800 transition'>Login</Link>
+                                        <Link to='/signup' className='text-gray-800 transition'>SignUp</Link>
+                                    </>
                                 }
                             </div>
                         </div>
