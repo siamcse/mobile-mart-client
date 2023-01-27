@@ -6,6 +6,7 @@ import { FaSistrix, FaRegHeart, FaUserAlt } from "react-icons/fa";
 import { AiOutlineBars, AiOutlineShoppingCart } from "react-icons/ai";
 import { IoIosArrowDown } from "react-icons/io";
 import DashboardChild from './DashboardChild';
+import { useQuery } from '@tanstack/react-query';
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
@@ -18,6 +19,15 @@ const Navbar = () => {
             })
             .catch(e => console.error(e))
     }
+
+    const { data: categories = [] } = useQuery({
+        queryKey: ['categories'],
+        queryFn: async () => {
+            const res = await fetch('https://mobile-mart-server-siamcse.vercel.app/categories');
+            const data = await res.json();
+            return data;
+        }
+    });
 
     return (
         <header className='py-4 shadow-sm bg-white'>
@@ -80,23 +90,15 @@ const Navbar = () => {
                         <span className='ml-2 text-white'>All Categories</span>
 
                         <div className='absolute w-full left-0 top-full bg-white shadow-md py-3 divide-y divide-dashed divide-gray-300 opacity-0 group-hover:opacity-100 transition duration-300 invisible group-hover:visible'>
-                            <Link className='py-3 px-6 flex items-center hover:bg-gray-200'>
-                                <img src="" alt="" className='w-5 h-5 object-contain' />
-                                <span className='ml-6 text-gray-600 text-sm'>Samsung</span>
-                            </Link>
-                            <Link className='py-3 px-6 flex items-center hover:bg-gray-200'>
-                                <img src="" alt="" className='w-5 h-5 object-contain' />
-                                <span className='ml-6 text-gray-600 text-sm'>Samsung</span>
-                            </Link>
-                            <Link className='py-3 px-6 flex items-center hover:bg-gray-200'>
-                                <img src="" alt="" className='w-5 h-5 object-contain' />
-                                <span className='ml-6 text-gray-600 text-sm'>Samsung</span>
-                            </Link>
-                            <Link className='py-3 px-6 flex items-center hover:bg-gray-200'>
-                                <img src="" alt="" className='w-5 h-5 object-contain' />
-                                <span className='ml-6 text-gray-600 text-sm'>Samsung</span>
-                            </Link>
-
+                            {
+                                categories.map(category => <Link
+                                    key={category._id}
+                                    to={`/category/${category._id}`}
+                                    className='py-3 px-6 flex items-center hover:bg-gray-200'>
+                                    <img src={category.image} alt="" className='w-5 h-5 object-contain' />
+                                    <span className='ml-6 text-gray-600 text-sm'>{category.name}</span>
+                                </Link>)
+                            }
                         </div>
                     </div>
                     {/* navbar link  */}

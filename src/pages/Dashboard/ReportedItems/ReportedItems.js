@@ -34,42 +34,41 @@ const ReportedItems = () => {
 
     return (
         <>{reportedProducts.length <= 0 ?
-            <>
+            <div className='container'>
                 <h2 className='text-2xl my-8'>Reported Items</h2>
                 <h3 className='text-xl font-semibold text-green-500'>There is no any reported product.</h3>
-            </>
+            </div>
             :
-            <div>
-                <h2 className='text-2xl my-8'>Reported Items</h2>
-                <div className="overflow-x-auto">
-                    <table className="table w-full">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Name</th>
-                                <th>Seller</th>
-                                <th>Email</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                reportedProducts.map((reportedProduct, i) => <tr key={reportedProduct._id}>
-                                    <th>{i + 1}</th>
-                                    <td>{reportedProduct.name}</td>
-                                    <td>{reportedProduct.seller}</td>
-                                    <td>{reportedProduct.email}</td>
-                                    <td>
-                                        <label onClick={() => setDeleteReportProduct(reportedProduct)} htmlFor="popup-modal" className="btn btn-ghost">
-                                            <RiDeleteBin6Line className='text-red-600 text-xl' />
-                                        </label>
-                                    </td>
-                                </tr>
-                                )
-                            }
-                        </tbody>
-                    </table>
-                </div>
+            <div className='container'>
+                <body class="flex items-center justify-center">
+                    <div class="container">
+                        <h2 className='text-2xl my-8'>Reported Products</h2>
+                        <table class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5">
+                            <thead class="text-white">
+                                {
+                                    reportedProducts.map(product => <tr key={product._id} class="bg-teal-400 flex flex-col flex-nowrap sm:table-row rounded-l-lg sm:rounded-none mb-4 sm:mb-0">
+                                        <th class="p-3 text-left">Name</th>
+                                        <th class="p-3 text-left">Seller</th>
+                                        <th class="p-3 text-left">Email</th>
+                                        <th class="p-3 text-left" width="110px">Actions</th>
+                                    </tr>)
+                                }
+                            </thead>
+                            <tbody class="flex-1 sm:flex-none">
+                                {
+                                    reportedProducts.map(product => <tr key={product._id} class="flex flex-col flex-nowrap sm:table-row mb-4 sm:mb-0">
+                                        <td class="border-grey-light border hover:bg-gray-100 p-3">{product.name}</td>
+                                        <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">{product.seller}</td>
+                                        <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">{product.email}</td>
+                                        <td class="border-grey-light border hover:bg-gray-100 p-3 text-red-400 hover:text-red-600 cursor-pointer"><label onClick={() => setDeleteReportProduct(product)} htmlFor="popup-modal" className="cursor-pointer">
+                                            <RiDeleteBin6Line className='text-red-600 text-2xl' />
+                                        </label></td>
+                                    </tr>)
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </body>
                 {
                     deleteReportProduct && <ConfirmationModal
                         title={'Are you sure to delete?'}

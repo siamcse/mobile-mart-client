@@ -14,14 +14,15 @@ const Categories = () => {
     });
 
     return (
-        <div className='my-20'>
+        <div className='my-20 container'>
             <h2 className='text-3xl text-center font-semibold'>Categories</h2>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-10'>
                 {
                     categories.map(category => <Link
                         key={category._id}
                         to={`/category/${category._id}`}
-                        className='card w-72 md:w-80 mx-auto border-2 shadow-xl rounded-lg'>
+                        data-tip={category.name}
+                        className='card w-36 h-36 md:h-40 md:w-40 mx-auto border-2 flex items-center justify-center shadow-xl rounded-lg tooltip'>
                         <img src={category.image} alt="" />
 
                     </Link>)

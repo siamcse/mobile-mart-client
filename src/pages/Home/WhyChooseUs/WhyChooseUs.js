@@ -11,7 +11,7 @@ const WhyChoseUs = () => {
                         <FaTruck className='text-5xl text-secondary' />
                     </div>
                     <div className='text-left ml-2'>
-                        <h2 className='text-xl text-primary font-bold py-1'>Free Shipping</h2>
+                        <h2 className='text-xl font-bold py-1'>Free Shipping</h2>
                         <p className='font-medium text-gray-400'>Free delivery on purchase over $100</p>
                     </div>
                 </div>
@@ -21,7 +21,7 @@ const WhyChoseUs = () => {
                         <FaHeadset className='text-5xl text-secondary' />
                     </div>
                     <div className='text-left ml-2'>
-                        <h2 className='text-xl text-accent font-bold py-1'>24/7 Customer Support</h2>
+                        <h2 className='text-xl  font-bold py-1'>24/7 Customer Support</h2>
                         <p className='font-medium text-gray-400'>Our Support Team Is Always Available For You</p>
                     </div>
                 </div>
@@ -31,7 +31,7 @@ const WhyChoseUs = () => {
                         <FaExchangeAlt className='text-5xl text-secondary' />
                     </div>
                     <div className='text-left ml-2'>
-                        <h2 className='text-xl text-accent font-bold py-1'>Easy Returns</h2>
+                        <h2 className='text-xl  font-bold py-1'>Easy Returns</h2>
                         <p className='font-medium text-gray-400'>Hassle free returns for the best experience</p>
                     </div>
                 </div>
@@ -41,7 +41,7 @@ const WhyChoseUs = () => {
                         <FaCubes className='text-5xl text-secondary' />
                     </div>
                     <div className='text-left ml-2'>
-                        <h2 className='text-xl text-accent font-bold py-1'>Top Quality</h2>
+                        <h2 className='text-xl  font-bold py-1'>Top Quality</h2>
                         <p className='font-medium text-gray-400'>Our Products Quality Are The Best In The Market</p>
                     </div>
                 </div>
