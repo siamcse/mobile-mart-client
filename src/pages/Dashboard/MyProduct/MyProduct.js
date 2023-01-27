@@ -62,7 +62,7 @@ const MyProduct = () => {
                     <table class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5">
                         <thead class="text-white">
                             {
-                                products.map(product => <tr key={product._id} class="bg-teal-400 flex flex-col flex-nowrap sm:table-row rounded-l-lg sm:rounded-none mb-4 sm:mb-0">
+                                products.map(product => <tr key={product._id} class="bg-primary flex flex-col flex-nowrap sm:table-row rounded-l-lg sm:rounded-none mb-4 sm:mb-0">
                                     <th class="p-3 text-left">Name</th>
                                     <th class="p-3 text-left">Resell Price</th>
                                     <th class="p-3 text-left">Sales Status</th>

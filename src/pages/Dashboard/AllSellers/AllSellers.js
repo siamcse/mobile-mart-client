@@ -54,7 +54,7 @@ const AllSellers = () => {
                     <table class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5">
                         <thead class="text-white">
                             {
-                                allSellers.map(seller => <tr key={seller._id} class="bg-teal-400 flex flex-col flex-nowrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+                                allSellers.map(seller => <tr key={seller._id} class="bg-primary flex flex-col flex-nowrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
                                     <th class="p-3 text-left">Name</th>
                                     <th class="p-3 text-left">Email</th>
                                     <th class="p-3 text-left">Verify</th>

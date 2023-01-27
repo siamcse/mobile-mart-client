@@ -28,9 +28,9 @@ const Category = () => {
     }
 
     return (
-        <div className='my-12'>
+        <div className='my-12 container'>
             <h2 className='text-3xl text-center font-semibold'>Products</h2>
-            <div className='lg:w-3/5 mx-auto'>
+            <div className='grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-5 mx-auto'>
                 {
                     products.map(product => <Product
                         key={product._id}

@@ -46,9 +46,9 @@ const AdvertisedProduct = () => {
         <>
             {
                 advertisedProduct &&
-                <div className='my-20'>
+                <div className='my-20 container'>
                     <h2 className='text-3xl text-center font-semibold'>Advertised Products</h2>
-                    <div className='lg:w-3/4 mx-auto'>
+                        <div className='grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-5 mx-2'>
                         {
                             advertisedProduct.map(product => product.isAvailable && <Product
                                 key={product._id}
